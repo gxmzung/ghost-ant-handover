@@ -87,3 +87,18 @@ Ant Colony Optimization based handover decision.
 ### Ghost Ant
 Lookahead-based predictive handover with reduced unnecessary switching.
 
+
+---
+
+## UAM Trajectory Simulation
+
+### UAM Path and Base Stations
+
+![UAM Trajectory](results/uam_trajectory.png)
+
+### Simulation Log
+
+The UAM simulation exports step-by-step selected cells, future predicted positions, and reward values.
+
+```text
+results/uam_simulation_log.csv
