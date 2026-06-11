@@ -1,0 +1,27 @@
+
+             Satellite
+                  │
+                  │
+          Ground Station
+                  │
+                  │
+          5G Base Station
+                  │
+                  ▼
+
+      Ghost Ant Lookahead Engine
+                  │
+        ┌─────────┴─────────┐
+        │                   │
+ Future Prediction     Candidate Cells
+        │                   │
+        └─────────┬─────────┘
+                  │
+             Reward Function
+                  │
+                  ▼
+          Adaptive Handover
+                  │
+                  ▼
+                VTOL/UAM
+
