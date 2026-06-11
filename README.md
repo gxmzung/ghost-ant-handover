@@ -58,3 +58,32 @@ tests/
 ## Status
 
 Research Prototype (v0.1)
+---
+
+## Simulation Results
+
+### Handover Comparison
+
+![Handover Comparison](results/handover_comparison.png)
+
+### Delay Comparison
+
+![Delay Comparison](results/delay_comparison.png)
+
+### Packet Loss Comparison
+
+![Packet Loss Comparison](results/packet_loss_comparison.png)
+
+---
+
+## Modes
+
+### Baseline
+Conventional reactive handover strategy.
+
+### ACO
+Ant Colony Optimization based handover decision.
+
+### Ghost Ant
+Lookahead-based predictive handover with reduced unnecessary switching.
+
