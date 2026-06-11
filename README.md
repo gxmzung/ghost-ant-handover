@@ -1,27 +1,60 @@
 # Ghost Ant Based Adaptive Handover Framework
 
-Research prototype for VTOL/UAM communication handover optimization.
+Adaptive communication optimization for VTOL/UAM environments.
 
-## Core Idea
+---
+
+## Research Motivation
 
 Communication failure is not just a network problem.
+
 It becomes a mission failure.
 
-## Objective
+---
+
+## Reward Function
 
 Q = α·RSRP + β·LoS − γ·Handover − δ·Delay − ε·PacketLoss
 
-## Keywords
+---
 
-- UAM
-- VTOL
-- Adaptive Handover
+## Core Components
+
 - Ghost Ant Lookahead
 - 3D Pheromone Map
-- Ant Colony Optimization
-- Packet Loss
-- Mission Safety
+- Adaptive Handover
+- Dynamic Weight
+- VTOL/UAM Connectivity
+- Packet Loss Optimization
+
+---
+
+## Future Work
+
+- [x] Reward Function
+- [x] Initial Prototype
+- [ ] Dynamic Weight
+- [ ] Ghost Ant Prediction
+- [ ] 3D Pheromone Map
+- [ ] ROS2 Simulation
+- [ ] PX4 Integration
+- [ ] Gazebo Evaluation
+
+---
+
+## Repository Structure
+
+```
+docs/
+research/
+simulation/
+scripts/
+src/
+tests/
+```
+
+---
 
 ## Status
 
-Research Note / Prototype
+Research Prototype (v0.1)
