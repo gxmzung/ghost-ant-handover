@@ -102,3 +102,18 @@ The UAM simulation exports step-by-step selected cells, future predicted positio
 
 ```text
 results/uam_simulation_log.csv
+
+---
+
+## Comparison Summary
+
+The framework compares three strategies:
+
+- Baseline
+- ACO
+- Ghost Ant
+
+See:
+
+```text
+results/comparison_summary.md
