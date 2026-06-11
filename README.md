@@ -117,3 +117,10 @@ See:
 
 ```text
 results/comparison_summary.md
+
+---
+
+## UAM Simulation Animation
+
+![UAM Animation](results/uam_animation.gif)
+
