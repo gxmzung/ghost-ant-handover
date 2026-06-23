@@ -47,7 +47,22 @@ def build_candidates(uam_position, stations, current_cell):
 def save_csv(rows):
     with open("results/uam_simulation_log.csv", "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["time", "x", "y", "z", "selected_cell", "future_x", "future_y", "future_z", "reward"])
+        writer.writerow([
+            "time",
+            "x",
+            "y",
+            "z",
+            "selected_cell",
+            "future_x",
+            "future_y",
+            "future_z",
+            "rsrp",
+            "los",
+            "delay_ms",
+            "packet_loss",
+            "handover",
+            "reward",
+        ])
         writer.writerows(rows)
 
 
@@ -106,6 +121,13 @@ def main():
         future = result["future_position"]
         reward = result["best_reward"]
 
+        selected_station = next(station for station in stations if station.cell_id == current_cell)
+        rsrp = estimate_rsrp(position, selected_station)
+        los = estimate_los(position, selected_station)
+        delay_ms = estimate_delay(rsrp)
+        packet_loss = estimate_packet_loss(rsrp, los)
+        handover_event = 1 if t > 0 and rows and rows[-1][4] != current_cell else 0
+
         rows.append([
             t,
             position[0],
@@ -115,7 +137,12 @@ def main():
             future[0],
             future[1],
             future[2],
-            reward,
+            round(rsrp, 4),
+            int(los),
+            round(delay_ms, 4),
+            round(packet_loss, 4),
+            handover_event,
+            round(reward, 4),
         ])
 
         print(
