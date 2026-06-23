@@ -1,6 +1,70 @@
-# Ghost Ant Based Adaptive Handover Framework
+# Ghost Ant Handover
 
-Adaptive communication optimization for VTOL/UAM environments.
+UAM communication handover optimization research using reward-based network selection and ant-colony-inspired decision logic.
+
+## Overview
+
+Ghost Ant Handover is a research-oriented project about UAM communication handover.
+
+The core idea is simple:
+
+> When a flying vehicle moves through different network zones, it should choose the most stable and efficient connection based on signal quality, movement, delay, and switching cost.
+
+## Problem
+
+UAM vehicles may move across multiple communication zones.  
+Frequent handovers can cause instability, delay, or connection loss.
+
+The challenge is to decide:
+
+- When should the system switch networks?
+- Which network should it choose?
+- How can unnecessary handovers be reduced?
+
+## Core Concept
+
+The handover decision is based on a reward function.
+
+Possible factors:
+
+- Signal strength
+- Latency
+- Packet loss
+- Vehicle speed
+- Direction
+- Handover cost
+- Connection stability
+
+## Why Ant Colony?
+
+Ant Colony Optimization is useful as a conceptual model because it explains how distributed agents can find efficient paths through repeated feedback.
+
+In this project, the idea is applied to network selection:
+
+- Better network paths receive higher scores
+- Unstable paths lose priority
+- The system gradually improves handover decisions
+
+## Current Status
+
+- Research concept
+- Reward function design
+- Simulation planning
+- UAM communication scenario definition
+
+## Roadmap
+
+### v0.1
+- Problem definition
+- Reward function draft
+
+### v0.5
+- Simulation model
+- Network switching scenario
+
+### v1.0
+- Handover decision dashboard
+- Comparative analysis
 
 ---
 
