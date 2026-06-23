@@ -1,0 +1,15 @@
+# Abstract
+
+Urban Air Mobility (UAM) systems require reliable communication during continuous movement across multiple network cells. Conventional handover approaches typically rely on simple signal-strength thresholds, which can result in unnecessary handovers, increased packet loss, and communication instability.
+
+This study proposes the Ghost Ant Handover algorithm, a communication-aware handover strategy inspired by ant-colony optimization. The proposed method maintains a pheromone-based representation of historical network quality and combines communication metrics such as signal quality, delay, packet loss, and handover cost to evaluate candidate networks.
+
+In addition, a Predictive Ghost Ant extension is introduced to incorporate estimated future network conditions into the handover decision process. This predictive mechanism enables the system to consider both current and expected communication quality before performing network transitions.
+
+The proposed methods were evaluated using a UAM communication simulation environment containing multiple network cells, dynamic signal conditions, packet-loss events, and communication-delay variations. Performance was compared against a conventional threshold-based handover strategy using delay, packet loss, handover count, and communication stability as evaluation metrics.
+
+Experimental results indicate that the Ghost Ant approach improves communication stability while reducing unnecessary handovers. The Predictive Ghost Ant extension further enhances performance by reducing delay and packet loss while maintaining stable communication behavior.
+
+Although the current implementation is simulation-based, the results demonstrate the potential of pheromone-inspired and predictive handover strategies for future UAM communication systems.
+
+**Keywords:** UAM, Handover Optimization, Ant Colony Optimization, Telemetry, Communication Stability, Predictive Networking
