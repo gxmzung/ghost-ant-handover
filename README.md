@@ -257,6 +257,33 @@ Current evaluation metrics include:
 
 ---
 
+## Study Notes
+
+This repository also includes study notes written while reviewing and understanding the implementation.
+
+The purpose is to document the concepts behind the code, not just the final result.
+
+```text
+study/
+├── python/          # Python language concepts used in this project
+├── wireless/        # Communication and handover-related concepts
+└── algorithms/      # Reward, prediction, and ant-colony-inspired logic
+```
+
+Current study topics:
+
+* `__init__.py` and Python package structure
+* `@dataclass` and Python decorators
+* `return max(...)` and minimum safety values
+* RSRP and wireless signal quality
+* reward function design
+* ant-colony-inspired feedback logic
+* predictive handover decision flow
+
+These notes are part of the process of moving from "building a project" to "understanding and explaining the system."
+
+
+---
 ## Run Demo
 
 Run all simulations:
