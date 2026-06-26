@@ -1,11 +1,11 @@
 # Ghost Ant Handover
 
 **UAM Communication Handover Optimization Research**  
-Reward Function · Ant Colony Concept · Predictive Handover · Simulation Dashboard
+Reward Function · Ant-Colony-Inspired Scoring · Predictive Handover · Simulation Dashboard
 
 ![Status](https://img.shields.io/badge/status-Research%20Prototype-blue)
 ![Focus](https://img.shields.io/badge/focus-UAM%20Handover-22314E)
-![Method](https://img.shields.io/badge/method-Reward%20Function%20%2B%20ACO-orange)
+![Method](https://img.shields.io/badge/method-Reward%20Function%20%2B%20ACO%20Inspired-orange)
 ![Language](https://img.shields.io/badge/language-Python-3776AB)
 
 ---
@@ -14,11 +14,22 @@ Reward Function · Ant Colony Concept · Predictive Handover · Simulation Dashb
 
 **Ghost Ant Handover** is a research-oriented simulation project for UAM communication handover optimization.
 
-The core idea is simple:
+The project explores how a flying vehicle can choose a more stable communication cell while moving through multiple network zones.
 
-> When a flying vehicle moves through multiple communication zones, it should choose the most stable network based on signal quality, delay, packet loss, movement, and handover cost.
+The core idea is:
 
-This repository explores reward-based network selection and ant-colony-inspired decision logic through simulation, visualization, comparison metrics, and dashboard prototypes.
+> Do not choose a network only by the current signal.  
+> Predict the future position, evaluate candidate cells, and select a more stable connection.
+
+This repository focuses on:
+
+- UAM movement simulation
+- candidate base-station evaluation
+- reward-based handover decision
+- ant-colony-inspired score update
+- predictive future-position evaluation
+- quantitative evaluation
+- dashboard visualization
 
 ---
 
@@ -26,7 +37,7 @@ This repository explores reward-based network selection and ant-colony-inspired 
 
 UAM vehicles may pass through multiple wireless network zones during flight.
 
-Frequent or poorly timed handovers can cause:
+Poorly timed handovers can cause:
 
 - unstable connection
 - increased latency
@@ -39,85 +50,247 @@ The key questions are:
 - When should the system switch networks?
 - Which network should it choose?
 - How can unnecessary handovers be reduced?
-- How can network quality be evaluated over time?
+- How can future network quality be considered?
 
 ---
 
-## Core Concept
-
-Ghost Ant Handover combines:
+## System Architecture
 
 ```text
 UAM Movement
         ↓
-Network Quality Observation
+Current Position / Velocity
         ↓
-Reward Function
+Future Position Prediction
         ↓
-Ant-Colony-Inspired Score Update
+Candidate Base Station Generation
         ↓
-Predictive Handover Decision
+Signal / Delay / Packet Loss Estimation
         ↓
-Comparison Metrics
-Reward Function
+Reward Calculation
+        ↓
+Pheromone Preference Update
+        ↓
+Candidate Ranking
+        ↓
+Selected Cell
+        ↓
+Simulation Log
+        ↓
+Evaluation Report / Dashboard
+```
 
-The handover decision is based on multiple factors.
+---
+
+## Why Ant Colony?
+
+Ant Colony Optimization, or ACO, is inspired by how ants find efficient paths using pheromone trails.
+
+In real ant behavior:
+
+- ants explore multiple paths
+- better paths receive stronger pheromone feedback
+- weak paths gradually lose influence
+- future ants are more likely to follow stronger paths
+
+This project does **not** implement a full production-grade ACO algorithm.
+
+Instead, it borrows the core idea of **feedback-based path preference** and applies it to UAM network handover.
+
+In this project:
+
+- each candidate base station is treated like a possible communication path
+- better communication conditions increase the score
+- unstable communication conditions reduce the score
+- previous decisions can influence future selection
+- the system tries to avoid unnecessary switching
+
+The goal is not to perfectly reproduce biological ant behavior.
+
+The goal is to use the ant-colony concept as a simple decision model for repeated network selection.
+
+---
+
+## What "Ghost Ant" Means
+
+The word **Ghost Ant** means a virtual exploration process.
+
+Before the real UAM reaches the next position, the algorithm predicts a future position and evaluates candidate cells in advance.
+
+```text
+Current UAM Position
+        ↓
+Predict Future Position
+        ↓
+Evaluate Candidate Cells
+        ↓
+Choose Better Cell Before Quality Drops
+```
+
+This is why the project is called **Ghost Ant**.
+
+It is like sending a virtual ant ahead of the UAM path to check which communication cell may become more stable.
+
+---
+
+## Decision Flow
+
+```text
+1. Move UAM
+2. Read current position and velocity
+3. Predict future position
+4. Build candidate base stations
+5. Estimate signal quality
+6. Estimate delay and packet loss
+7. Calculate reward
+8. Add pheromone preference
+9. Apply handover cost
+10. Select best cell
+11. Save simulation log
+12. Generate evaluation summary
+```
+
+---
+
+## Reward and Pheromone Concept
+
+The decision score is based on two ideas.
+
+### 1. Reward
+
+Reward represents communication quality.
 
 Possible reward factors:
 
-Signal strength
-Latency
-Packet loss
-Vehicle speed
-Movement direction
-Handover cost
-Connection stability
-Predicted future network quality
+- signal strength
+- delay
+- packet loss
+- vehicle speed
+- movement direction
+- handover cost
+- connection stability
+- predicted future network quality
 
-The reward function is designed to reduce unstable or unnecessary handovers while keeping the UAM connected to a reliable network.
+### 2. Pheromone
 
-More details:
+Pheromone represents accumulated preference from previous decisions.
 
-Reward Function
-Mathematical Model
-Why Ant Colony?
+It is used to make the system remember which paths or cells were repeatedly useful.
 
-Ant Colony Optimization is useful as a conceptual model because it explains how distributed agents can find efficient paths through repeated feedback.
+A simplified decision idea is:
 
-In this project, the concept is adapted to network selection:
+```text
+Decision Score = Reward + Pheromone Score - Handover Cost
+```
 
-Better network paths receive higher scores
-Unstable paths lose priority
-Past decisions influence future selection
-Repeated simulation improves route-quality understanding
+This makes the algorithm prefer cells that are not only good at the current moment, but also stable across repeated simulation steps.
 
-This is not a full production-grade ACO network controller.
-It is a research prototype for handover decision modeling.
+---
 
-Simulation Results
+## Main Modules
+
+```text
+src/
+├── ghost_ant.py              # Basic handover decision logic
+├── predictive_ghost_ant.py   # Future-position-based Ghost Ant logic
+├── pheromone.py              # Simplified pheromone preference map
+├── reward.py                 # Reward calculation logic
+├── adaptive_handover.py      # Adaptive handover concept
+└── dynamic_weight.py         # Dynamic weighting concept
+```
+
+---
+
+## Simulation Modules
+
+```text
+simulation/
+├── uam.py                    # UAM position and movement model
+├── environment.py            # Base-station environment generation
+├── cell.py                   # Signal, delay, packet-loss estimation
+├── metrics.py                # Metric calculation support
+└── compare_modes.py          # Comparison between handover strategies
+```
+
+---
+
+## Scripts
+
+```text
+scripts/
+├── uam_simulation.py         # Main UAM simulation runner
+├── evaluate_results.py       # Quantitative evaluation summary
+├── visualize_pheromone.py    # Pheromone map visualization
+├── generate_comparison_table.py
+├── demo.py
+├── ghost_demo.py
+├── handover_demo.py
+└── predictive_demo.py
+```
+
+---
+
+## Results
 
 The repository includes simulation outputs and comparison visualizations.
 
-UAM Trajectory
+```text
+results/
+├── uam_simulation_log.csv
+├── evaluation_summary.md
+├── uam_trajectory.png
+├── handover_comparison.png
+├── delay_comparison.png
+├── packet_loss_comparison.png
+├── pheromone_map.png
+└── comparison_summary.md
+```
 
-Handover Comparison
+Current evaluation metrics include:
 
-Delay Comparison
+- average reward
+- average delay
+- average packet loss
+- handover count
+- stability score
+- selected cell usage
 
-Packet Loss Comparison
+---
 
-Pheromone Map
+## Run Demo
 
-Run Demo
-Run all simulations
+Run all simulations:
+
+```bash
 ./run_all.sh
-Run main simulation
+```
+
+Run main simulation:
+
+```bash
 python3 scripts/uam_simulation.py
-Run dashboard
+```
+
+Run evaluation:
+
+```bash
+python3 scripts/evaluate_results.py
+```
+
+Run dashboard:
+
+```bash
 streamlit run dashboard.py
-Project Structure
+```
+
+---
+
+## Project Structure
+
+```text
 ghost-ant-handover/
 ├── docs/             # Mathematical model, reward function, system design
+├── paper/            # Paper-style draft sections
 ├── research/         # Ghost Ant and predictive handover notes
 ├── results/          # Simulation outputs and figures
 ├── scripts/          # Demo, visualization, and simulation scripts
@@ -125,65 +298,78 @@ ghost-ant-handover/
 ├── src/              # Reward, pheromone, handover, and prediction logic
 ├── dashboard.py      # Streamlit dashboard prototype
 └── run_all.sh        # Full simulation runner
-Tech Stack
-Python
-Streamlit
-Matplotlib
-Simulation logic
-Reward modeling
-Ant-colony-inspired scoring
-Predictive handover concept
-Current Status
+```
+
+---
+
+## Tech Stack
+
+- Python
+- Pandas
+- Matplotlib
+- Streamlit
+- Simulation logic
+- Reward modeling
+- Ant-colony-inspired scoring
+- Predictive handover concept
+
+---
+
+## Current Status
 
 Ghost Ant Handover is currently a research prototype.
 
 Implemented or partially implemented:
 
-UAM trajectory simulation
-Reward-based handover logic
-Predictive Ghost Ant logic
-Pheromone map visualization
-Comparison result generation
-Streamlit dashboard prototype
-Research documentation
-Roadmap
-v0.1 — Problem Definition
-Define UAM handover problem
-Draft reward function
-Build basic simulation environment
-v0.5 — Simulation and Metrics
-Add UAM movement simulation
-Compare handover strategies
-Generate delay / packet loss / handover count metrics
-v1.0 — Predictive Ghost Ant
-Add predictive handover logic
-Improve pheromone scoring
-Add dashboard visualization
-Document mathematical model
-v2.0 — Research Paper Direction
-Formalize model assumptions
-Compare with baseline methods
-Improve scenario generation
-Prepare paper-style report
-Limitations
+- UAM trajectory simulation
+- reward-based handover logic
+- predictive Ghost Ant logic
+- pheromone map visualization
+- comparison result generation
+- quantitative evaluation summary
+- Streamlit dashboard prototype
+- paper-style documentation
+
+---
+
+## Research Direction
+
+Next research steps:
+
+- formalize the pheromone update equation
+- compare with baseline handover methods
+- improve wireless channel assumptions
+- add more realistic UAM movement scenarios
+- evaluate handover stability over longer simulations
+- prepare a paper-style technical report
+
+---
+
+## Limitations
 
 Current limitations:
 
-Simulation assumptions are simplified
-Real UAM communication data is not used
-Wireless channel model is not production-grade
-Handover model is research-oriented
-Not validated for real flight communication systems
-Author
+- simulation assumptions are simplified
+- real UAM communication data is not used
+- wireless channel model is not production-grade
+- pheromone update rule is simplified
+- handover model is research-oriented
+- not validated for real flight communication systems
 
-Lee Youngjun
-Department of Computer Science, Paejae University
-GitHub: @gxmzung
+This project is not a certified UAM communication controller or production-grade handover system.
 
-Disclaimer
+---
+
+## Author
+
+Lee Youngjun  
+Department of Computer Science, Paejae University  
+GitHub: [@gxmzung](https://github.com/gxmzung)
+
+---
+
+## Disclaimer
 
 This repository is a research and simulation prototype.
 
-It is not a certified UAM communication controller or production-grade handover system.
-
-```
+It is not a certified UAM communication controller, telecom product, or production-grade network handover system.
