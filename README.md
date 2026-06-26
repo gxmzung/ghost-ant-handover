@@ -257,31 +257,47 @@ Current evaluation metrics include:
 
 ---
 
-## Study Notes
+---
 
-This repository also includes study notes written while reviewing and understanding the implementation.
+## Implementation Study Notes
 
-The purpose is to document the concepts behind the code, not just the final result.
+Understanding the implementation is as important as building it.
+
+To improve technical understanding, this repository includes personal study notes that explain the concepts used throughout the project.
+
+These notes are written while reviewing the implementation and are continuously updated as the project evolves.
 
 ```text
 study/
-├── python/          # Python language concepts used in this project
-├── wireless/        # Communication and handover-related concepts
-└── algorithms/      # Reward, prediction, and ant-colony-inspired logic
+├── python/
+│   ├── init-py.md
+│   ├── decorators.md
+│   └── return-max.md
+│
+├── wireless/
+│   ├── rsrp.md
+│   ├── rsrq.md
+│   ├── sinr.md
+│   └── handover.md
+│
+└── algorithms/
+    ├── ant-colony.md
+    ├── reward-function.md
+    └── predictive-handover.md
 ```
 
-Current study topics:
+Current topics include:
 
-* `__init__.py` and Python package structure
-* `@dataclass` and Python decorators
-* `return max(...)` and minimum safety values
-* RSRP and wireless signal quality
-* reward function design
-* ant-colony-inspired feedback logic
-* predictive handover decision flow
+- Python package structure (`__init__.py`)
+- Python decorators (`@`)
+- Reward function implementation
+- Wireless communication metrics (RSRP, RSRQ, SINR)
+- Ant-colony-inspired decision logic
+- Predictive handover strategy
 
-These notes are part of the process of moving from "building a project" to "understanding and explaining the system."
+The goal is not only to develop the project, but also to understand and explain every design decision behind it.
 
+---
 
 ---
 ## Run Demo
