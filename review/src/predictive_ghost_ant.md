@@ -97,6 +97,56 @@ It predicts the future position of the UAM, evaluates candidate communication ce
 
 ---
 
+## Code-by-Code Summary
+
+```text
+dataclass
+    ↓
+Define simple data containers for UAV state and candidate cells.
+
+UAVState
+    ↓
+Stores current position and velocity.
+
+FutureCandidateCell
+    ↓
+Stores candidate communication-cell data.
+
+PredictiveGhostAnt
+    ↓
+Main predictive handover decision class.
+
+predict_future_position()
+    ↓
+Estimates where the UAM will be after lookahead steps.
+
+evaluate_candidate()
+    ↓
+Converts candidate-cell quality into a reward score.
+
+virtual_explore()
+    ↓
+Evaluates all candidates, updates pheromone, and selects the best cell.
+```
+
+The most important flow is:
+
+```text
+Current UAV State
+        ↓
+Future Position Prediction
+        ↓
+Candidate Cell Evaluation
+        ↓
+Reward Calculation
+        ↓
+Pheromone Deposit
+        ↓
+Best Cell Selection
+```
+
+---
+
 ## Why This File Exists
 
 A normal handover decision can choose a cell based only on the current signal condition.
