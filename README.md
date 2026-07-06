@@ -296,7 +296,9 @@ Current topics include:
 - Predictive handover strategy
 
 The goal is not only to develop the project, but also to understand and explain every design decision behind it.
+
 ---
+
 ## Run Demo
 
 Run all simulations:
